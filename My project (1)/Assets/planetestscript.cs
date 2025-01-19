@@ -35,6 +35,7 @@ public class Aerodynamics : MonoBehaviour
     {
         HandleSlingshotInput();
         AdjustPlaneTilt();
+        AlignPlaneWithVelocity();
     }
 
     private void FixedUpdate()
@@ -46,10 +47,20 @@ public class Aerodynamics : MonoBehaviour
         }
     }
 
+    private void AlignPlaneWithVelocity()
+    {
+        Vector3 velocity = rb.linearVelocity;
+        if (velocity.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(velocity.normalized, Vector3.up);
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.deltaTime * 5f));
+        }
+    }
+
     private void AdjustPlaneTilt()
     {
         float tiltAmount = 1.5f;
-        float maxTiltAngle = 30f;
+        float maxTiltAngle = 45f;
         float rollInput = Input.GetAxis("Horizontal");
         float pitchInput = Input.GetAxis("Vertical");
         Vector3 currentRotation = transform.eulerAngles;
