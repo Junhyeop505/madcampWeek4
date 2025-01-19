@@ -270,11 +270,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 139574546761759076, guid: a352786b6b57f4182bd63a3450dc4bfa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 139574546761759076, guid: a352786b6b57f4182bd63a3450dc4bfa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 139574546761759076, guid: a352786b6b57f4182bd63a3450dc4bfa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -407,11 +407,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5473610922499840428, guid: f59cf1ddd9a0042c4b3658e0f9d7a3ac, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5473610922499840428, guid: f59cf1ddd9a0042c4b3658e0f9d7a3ac, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5473610922499840428, guid: f59cf1ddd9a0042c4b3658e0f9d7a3ac, type: 3}
       propertyPath: m_LocalRotation.w
@@ -592,6 +592,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1167366482872629395, guid: da0b841112d854098a9f654e85fc2c13, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1452551693151369801, guid: da0b841112d854098a9f654e85fc2c13, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -34
@@ -662,11 +666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7020582496624555387, guid: da0b841112d854098a9f654e85fc2c13, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7020582496624555387, guid: da0b841112d854098a9f654e85fc2c13, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7020582496624555387, guid: da0b841112d854098a9f654e85fc2c13, type: 3}
       propertyPath: m_LocalRotation.w
@@ -757,7 +761,9 @@ MonoBehaviour:
   rangeMultiplier: 1.5
   rotationAngle: 90
   titleObjectName: TitlePP
+  startCloudPrefab: {fileID: 1801049312}
   titleStartOffset: 0.3
+  fadeInDuration: 1.5
   cameraTiltDuration: 5
 --- !u!1 &2144843169 stripped
 GameObject:
