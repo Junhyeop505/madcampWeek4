@@ -207,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1068571, y: -0.09832294, z: 0.010705843, w: 0.989343}
-  m_LocalPosition: {x: -0.48, y: 2.56, z: -16.7}
+  m_LocalPosition: {x: -0.48, y: 3.78, z: -22.7}
   m_LocalScale: {x: 1.4861, y: 1.64, z: 1.4861}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c02eabc3dc66eea4fb88444ebd81be1c, type: 3}
   m_Name: 
@@ -273,6 +273,7 @@ MonoBehaviour:
   Offset: {x: 0, y: 5, z: -20}
   smoothSpeed: 0.125
   fixedRotation: {x: 30, y: 0, z: 0}
+  dynamicOffset: 1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +406,7 @@ GameObject:
   - component: {fileID: 426415224}
   - component: {fileID: 426415223}
   - component: {fileID: 426415222}
+  - component: {fileID: 426415225}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -473,6 +475,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &426415225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426415221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6edfb57ee35e58e45ba7b0bb8a9c5749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  liftCoefficient: 0.8
+  dragCoefficient: 0.2
+  wingArea: 0.2
+  airDensity: 1.225
+  maxPullForce: 10
+  maxPullDistance: 10
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,8 +562,8 @@ MonoBehaviour:
   dragCoefficient: 0.1
   wingArea: 0.2
   airDensity: 1.225
-  throwForceMagnitude: 10
-  throwAngle: 15
+  maxPullForce: 100
+  maxPullDistance: 5
 --- !u!54 &832575521
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -837,7 +858,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663502077}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.9
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -958,12 +979,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  liftCoefficient: 1.2
+  liftCoefficient: 0.7
   dragCoefficient: 0.1
   wingArea: 0.2
   airDensity: 1.225
-  throwForceMagnitude: 10
-  throwAngle: 15
+  maxPullForce: 15
+  maxPullDistance: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
