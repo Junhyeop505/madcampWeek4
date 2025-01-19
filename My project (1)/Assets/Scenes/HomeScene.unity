@@ -761,7 +761,7 @@ MonoBehaviour:
   rangeMultiplier: 1.5
   rotationAngle: 90
   titleObjectName: TitlePP
-  startCloudPrefab: {fileID: 1801049312}
+  startCloudObjectName: StartCloud
   titleStartOffset: 0.3
   fadeInDuration: 1.5
   cameraTiltDuration: 5
