@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; // SceneManager를 사용하기 위해 추가
 
-public class FloatingMotion : MonoBehaviour
+public class FloatingMotion2 : MonoBehaviour
 {
     public float speed = 2.0f; // 위아래로 움직이는 속도
     public float amplitude = 0.5f; // 움직이는 거리
@@ -23,7 +23,6 @@ public class FloatingMotion : MonoBehaviour
 
     void OnMouseDown()
     {
-        // StartCloud가 클릭되었을 때 LobyScene으로 전환
-        SceneManager.LoadScene("LobyScene");
+        SceneManager.LoadScene("PlaymapScene");
     }
 }
