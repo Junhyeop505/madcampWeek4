@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Aerodynamics : MonoBehaviour
 {
@@ -33,9 +34,26 @@ public class Aerodynamics : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!IsPointerOverUI())
+            {
+                PerformGameAction();
+            }
+        }
         HandleSlingshotInput();
         AdjustPlaneTilt();
         AlignPlaneWithVelocity();
+    }
+
+    bool IsPointerOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    void PerformGameAction()
+    {
+        Debug.Log("Clicked");
     }
 
     private void FixedUpdate()
