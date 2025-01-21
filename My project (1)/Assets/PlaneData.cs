@@ -1,9 +1,12 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlaneData:MonoBehaviour
 {
     public static PlaneData Instance;
-    public int selectedPlaneIndex = 0;
+    public List<GameObject> planeModels = new List<GameObject>();
+    public int selectedPlaneIndex = -1;
     private void Awake()
     {
         if(Instance == null)
@@ -17,9 +20,29 @@ public class PlaneData:MonoBehaviour
         }
     }
 
+    //public void AddNewPlane(GameObject newPlanePrefab)
+    //{
+    //    planeModels.Add(newPlanePrefab);
+    //}
+
     public void SetPlaneModel(int index)
     {
         selectedPlaneIndex = index;
     }
+
+    public GameObject GetSelectPlane()
+    {
+        return planeModels[selectedPlaneIndex];
+    }
+
+    //public void SpawnSelectedPlane(Vector3 position, Quaternion rotation)
+    //{
+    //    GameObject selectedPlane = GetSelectPlane();
+    //    if (selectedPlane != null)
+    //    {
+    //        Instantiate(selectedPlane, position, rotation);
+    //        Debug.Log("spawned plane: " + selectedPlane.name);
+    //    }
+    //}
 }
    

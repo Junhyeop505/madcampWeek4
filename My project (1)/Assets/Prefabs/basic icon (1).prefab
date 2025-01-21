@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6edfb57ee35e58e45ba7b0bb8a9c5749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: -5860311451412537971}
   liftCoefficient: 0.7
   dragCoefficient: 0.1
   wingArea: 0.2
