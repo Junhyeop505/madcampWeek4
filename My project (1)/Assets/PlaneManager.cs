@@ -46,23 +46,28 @@ public class PlaneManager : MonoBehaviour
            float.TryParse(inputLiftCoefficient.text, out liftCoefficient) &&
             float.TryParse(inputDragCoefficient.text, out dragCoefficient))
         {
-            GameObject newPlane=Instantiate(planePrefab,new Vector3(0,0,0), Quaternion.identity);
-            Aerodynamics planeScript=newPlane.GetComponent<Aerodynamics>();
+            //GameObject newPlane=Instantiate(planePrefab,new Vector3(0,0,0), Quaternion.identity);
+            //Aerodynamics planeScript=newPlane.GetComponent<Aerodynamics>();
 
-            if(planeScript != null)
-            {
-                planeScript.wingArea = wingArea;
-                planeScript.liftCoefficient = liftCoefficient;
-                planeScript.dragCoefficient = dragCoefficient;
-            }
+            //if(planeScript != null)
+            //{
+            //    planeScript.wingArea = wingArea;
+            //    planeScript.liftCoefficient = liftCoefficient;
+            //    planeScript.dragCoefficient = dragCoefficient;
+            //}
 
-            //PlaneData.Instance.AddNewPlane(newPlane);
-            PlaneData.Instance.planeModels.Add(newPlane);
+            ////PlaneData.Instance.AddNewPlane(newPlane);
+            //PlaneData.Instance.planeModels.Add(newPlane);
 
-            //CreatePlaneSelectionButton("Plane"+PlaneData.Instance.planeModels.Count, PlaneData.Instance.planeModels.Count-1);
+            ////CreatePlaneSelectionButton("Plane"+PlaneData.Instance.planeModels.Count, PlaneData.Instance.planeModels.Count-1);
+            //int newIndex = PlaneData.Instance.planeModels.Count - 1;
+            //CreatePlaneSelectionButton("Plane " + newIndex, newIndex);
+
+            //addPlanePanel.SetActive(false);
+            //planeContainer.gameObject.SetActive(true);
+            PlaneData.Instance.planeModels.Add(planePrefab);
             int newIndex = PlaneData.Instance.planeModels.Count - 1;
-            CreatePlaneSelectionButton("Plane " + newIndex, newIndex);
-
+            CreatePlaneSelectionButton("Plane" + newIndex, newIndex);
             addPlanePanel.SetActive(false);
             planeContainer.gameObject.SetActive(true);
 
