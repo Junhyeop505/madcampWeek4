@@ -81,34 +81,34 @@ public class PlaneSpawner : MonoBehaviour
     public Vector3 spawnPosition = new Vector3(0, 0, 0);
     public Quaternion spawnRotation = Quaternion.identity;
 
-    //void Start()
-    //{
-    //    //GameObject planeSpawnerPrefab = Resources.Load<GameObject>("PlaneSpawner");
-    //    if (PlaneData.Instance == null)
-    //    {
-    //        Debug.LogError("PlaneData instance is null! Ensure PlaneData exists.");
-    //        return;
-    //    }
-
-    //    GameObject selectedPlanePrefab = PlaneData.Instance.GetSelectPlane();
-    //    if (selectedPlanePrefab != null)
-    //    {
-    //        GameObject spawnedPlane = Instantiate(selectedPlanePrefab, spawnPosition, spawnRotation);
-    //        Debug.Log("Spawned plane: " + spawnedPlane.name);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("No plane selected, unable to spawn.");
-    //    }
-    //}
-
-    private void Start()
+    void Start()
     {
-        GameObject planeSpawnerPrefab = Resources.Load<GameObject>("PlaneSpawner");
-        if (planeSpawnerPrefab != null)
+        //GameObject planeSpawnerPrefab = Resources.Load<GameObject>("PlaneSpawner");
+        if (PlaneData.Instance == null)
         {
-            Instantiate(planeSpawnerPrefab);
-            Debug.Log("Plane spawner instantiate");
+            Debug.LogError("PlaneData instance is null! Ensure PlaneData exists.");
+            return;
+        }
+
+        GameObject selectedPlanePrefab = PlaneData.Instance.GetSelectPlane();
+        if (selectedPlanePrefab != null)
+        {
+            GameObject spawnedPlane = Instantiate(selectedPlanePrefab, spawnPosition, spawnRotation);
+            Debug.Log("Spawned plane: " + spawnedPlane.name);
+        }
+        else
+        {
+            Debug.LogError("No plane selected, unable to spawn.");
         }
     }
+
+    //private void Start()
+    //{
+    //    GameObject planeSpawnerPrefab = Resources.Load<GameObject>("PlaneSpawner");
+    //    if (planeSpawnerPrefab != null)
+    //    {
+    //        Instantiate(planeSpawnerPrefab);
+    //        Debug.Log("Plane spawner instantiate");
+    //    }
+    //}
 }
