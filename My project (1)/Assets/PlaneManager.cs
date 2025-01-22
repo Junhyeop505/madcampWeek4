@@ -97,7 +97,7 @@ public class PlaneManager : MonoBehaviour
 
     private void LoadGameScene()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("PlaymapScene");
     }
 
    

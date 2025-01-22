@@ -18,7 +18,7 @@ public class Aerodynamics : MonoBehaviour
     private Vector3 pullEndPosition;
     private Vector3 originalPosition;
     private float yaw = 0f;
-    private float pitch = 0f; 
+    private float pitch = 0f;
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class Aerodynamics : MonoBehaviour
 
         rb.centerOfMass = new Vector3(0, -0.05f, 0);
         rb.isKinematic = true; // Start stationary
-        originalPosition=transform.position;
+        originalPosition = transform.position;
     }
 
     private void Update()
@@ -58,7 +58,7 @@ public class Aerodynamics : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if ((!isPulling)&&released) // Only apply aerodynamics when not pulling
+        if ((!isPulling) && released) // Only apply aerodynamics when not pulling
         {
             ApplyAerodynamics();
             //AdjustPlaneTilt();
@@ -114,14 +114,14 @@ public class Aerodynamics : MonoBehaviour
 
     private Vector3 GetMouseWorldPosition()
     {
-        Vector3 mousePosition=Input.mousePosition;
+        Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = 10f;
         return Camera.main.ScreenToViewportPoint(mousePosition);
     }
 
     private void AdjustPlanePositionAndRotation()
     {
-        float mouseX=Input.GetAxis("Mouse X")*100f*Time.deltaTime; 
+        float mouseX = Input.GetAxis("Mouse X") * 100f * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * 100f * Time.deltaTime;
 
         yaw -= mouseX;
@@ -143,13 +143,13 @@ public class Aerodynamics : MonoBehaviour
         float pullMagnitude = Mathf.Clamp(pullVector.magnitude, 0, maxPullDistance); // Limit pull force
 
         // Launch direction based on pull vector
-        Vector3 forceDirection = (originalPosition-transform.position).normalized;
-        float force = pullMagnitude/maxPullDistance * maxPullForce;
+        Vector3 forceDirection = (originalPosition - transform.position).normalized;
+        float force = pullMagnitude / maxPullDistance * maxPullForce;
 
         Debug.Log($"Launching with Force: {forceDirection * force}");
 
         // Apply the release force
-        rb.AddForce(forceDirection * force,ForceMode.Impulse);
+        rb.AddForce(forceDirection * force, ForceMode.Impulse);
         released = true;
     }
 
@@ -158,16 +158,16 @@ public class Aerodynamics : MonoBehaviour
         Vector3 velocity = rb.linearVelocity;
         float speed = velocity.magnitude;
 
-            // Calculate lift force perpendicular to velocity and plane's right vector
-            Vector3 liftDirection = Vector3.Cross(velocity.normalized, transform.right).normalized;
-            float lift = liftCoefficient * 0.5f * airDensity * Mathf.Pow(speed, 2) * wingArea;
+        // Calculate lift force perpendicular to velocity and plane's right vector
+        Vector3 liftDirection = Vector3.Cross(velocity.normalized, transform.right).normalized;
+        float lift = liftCoefficient * 0.5f * airDensity * Mathf.Pow(speed, 2) * wingArea;
 
-            // Calculate drag force opposite to velocity
-            Vector3 dragDirection = -velocity.normalized;
-            float drag = dragCoefficient * 0.5f * airDensity * Mathf.Pow(speed, 2) * wingArea;
+        // Calculate drag force opposite to velocity
+        Vector3 dragDirection = -velocity.normalized;
+        float drag = dragCoefficient * 0.5f * airDensity * Mathf.Pow(speed, 2) * wingArea;
 
-            // Apply lift and drag forces
-            rb.AddForce(liftDirection * lift);
-            rb.AddForce(dragDirection * drag);
+        // Apply lift and drag forces
+        rb.AddForce(liftDirection * lift);
+        rb.AddForce(dragDirection * drag);
     }
 }
