@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor.Rendering;
 
 public class PlaneManager : MonoBehaviour
 {
@@ -46,26 +47,20 @@ public class PlaneManager : MonoBehaviour
            float.TryParse(inputLiftCoefficient.text, out liftCoefficient) &&
             float.TryParse(inputDragCoefficient.text, out dragCoefficient))
         {
-            //GameObject newPlane=Instantiate(planePrefab,new Vector3(0,0,0), Quaternion.identity);
-            //Aerodynamics planeScript=newPlane.GetComponent<Aerodynamics>();
-
-            //if(planeScript != null)
-            //{
-            //    planeScript.wingArea = wingArea;
-            //    planeScript.liftCoefficient = liftCoefficient;
-            //    planeScript.dragCoefficient = dragCoefficient;
-            //}
-
-            ////PlaneData.Instance.AddNewPlane(newPlane);
-            //PlaneData.Instance.planeModels.Add(newPlane);
-
-            ////CreatePlaneSelectionButton("Plane"+PlaneData.Instance.planeModels.Count, PlaneData.Instance.planeModels.Count-1);
-            //int newIndex = PlaneData.Instance.planeModels.Count - 1;
-            //CreatePlaneSelectionButton("Plane " + newIndex, newIndex);
-
-            //addPlanePanel.SetActive(false);
-            //planeContainer.gameObject.SetActive(true);
+            GameObject newPlane=Instantiate(planePrefab, Vector3.zero, Quaternion.identity);
+            Aerodynamics planeScript= newPlane.GetComponent<Aerodynamics>();
+            if (planeScript != null)
+            {
+                planeScript.wingArea = wingArea;
+                planeScript.liftCoefficient = liftCoefficient;
+                planeScript.dragCoefficient = dragCoefficient;
+            }
             PlaneData.Instance.planeModels.Add(planePrefab);
+            PlaneData.Instance.planeAttributes.Add(new PlaneAttributes{
+                WingArea = wingArea,
+                LiftCoefficient = liftCoefficient,
+                DragCoefficient= dragCoefficient,
+            });
             int newIndex = PlaneData.Instance.planeModels.Count - 1;
             CreatePlaneSelectionButton("Plane" + newIndex, newIndex);
             addPlanePanel.SetActive(false);

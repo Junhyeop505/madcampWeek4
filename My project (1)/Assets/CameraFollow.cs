@@ -4,11 +4,11 @@ using static UnityEngine.GraphicsBuffer;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target; // The object the camera will follow
-    public Vector3 Offset=new Vector3(0,5,-5); // Offset position from the target
+    public Vector3 Offset=new Vector3(0,2,-2); // Offset position from the target
     public float smoothSpeed = 0.2f; // Smoothness factor for camera movement
     public Vector3 fixedRotation = new Vector3(10, 0, 0);
     public bool dynamicOffset = true;
-    public Vector3 fixedPosition = new Vector3(0, 10, -10);
+    public Vector3 fixedPosition = new Vector3(0, 10, -70);
     private bool isFollowing = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //void Start()

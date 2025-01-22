@@ -6,7 +6,9 @@ public class PlaneData:MonoBehaviour
 {
     public static PlaneData Instance;
     public List<GameObject> planeModels = new List<GameObject>();
+    public List<PlaneAttributes> planeAttributes = new List<PlaneAttributes>();
     public int selectedPlaneIndex = -1;
+    public float planeTravelDistance = 0f;
     private void Awake()
     {
         if(Instance == null)
@@ -44,5 +46,18 @@ public class PlaneData:MonoBehaviour
     //        Debug.Log("spawned plane: " + selectedPlane.name);
     //    }
     //}
+
+    //public struct PlaneAttributes
+    //{
+    //    public float WingArea;
+    //    public float LiftCoefficient;
+    //    public float DragCoefficient;
+    //}
 }
-   
+public struct PlaneAttributes
+{
+    public float WingArea;
+    public float LiftCoefficient;
+    public float DragCoefficient;
+}
+
