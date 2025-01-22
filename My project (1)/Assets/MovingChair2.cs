@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MovingChair2 : MonoBehaviour
 {
-    public float movementDistance = 5f; // X, Z 축의 이동 최대 거리
+    public float movementDistance = 3f; // X, Z 축의 이동 최대 거리
     public float movementSpeed = 1f;   // 이동 속도 (주기 설정)
     public float phaseOffset = 0f;     // 시간에 따른 Phase Offset (시작 시간 차이)
 
