@@ -4,7 +4,7 @@ public class WaterSprayer : MonoBehaviour
 {
     public GameObject waterPrefab; // 물방울 Prefab
     public Transform firePoint;    // 물이 발사되는 위치
-    public float launchForce = 20f; // 발사 초기 속도
+    public float launchForce = 24; // 발사 초기 속도
     public float spawnInterval = 0f; // 물방울 생성 간격
 
     private float spawnTimer; // 생성 간격 타이머
