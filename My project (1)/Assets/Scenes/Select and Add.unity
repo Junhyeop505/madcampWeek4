@@ -528,6 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeModels: []
   selectedPlaneIndex: -1
+  planeTravelDistance: 0
 --- !u!4 &425047317
 Transform:
   m_ObjectHideFlags: 0

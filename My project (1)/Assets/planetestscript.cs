@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Aerodynamics : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Aerodynamics : MonoBehaviour
     public float maxPullForce = 30f; // Maximum force applied during slingshot
     public float maxPullDistance = 10f; // Maximum pull distance
 
+
     private bool isPulling = false;
     private bool released = false;
     private Vector3 pullStartPosition;
@@ -19,6 +21,13 @@ public class Aerodynamics : MonoBehaviour
     private Vector3 originalPosition;
     private float yaw = 0f;
     private float pitch = 0f;
+
+    public float minSpeedThreshold = 0.05f;
+    public float stopTimer = 0f;
+    public float stopDelay = 5f;
+    private bool isStopped = false;
+
+    private float startXPosition;
 
     private void Start()
     {
@@ -30,6 +39,7 @@ public class Aerodynamics : MonoBehaviour
         rb.centerOfMass = new Vector3(0, -0.05f, 0);
         rb.isKinematic = true; // Start stationary
         originalPosition = transform.position;
+        startXPosition = transform.position.x;
     }
 
     private void Update()
@@ -62,6 +72,34 @@ public class Aerodynamics : MonoBehaviour
         {
             ApplyAerodynamics();
             //AdjustPlaneTilt();
+            CheckForStopCondition();
+            TrackDistance();
+        }
+    }
+
+    private void TrackDistance()
+    {
+        float distanceTraveled=transform.position.x-startXPosition;
+        if (distanceTraveled > PlaneData.Instance.planeTravelDistance)
+        {
+            PlaneData.Instance.planeTravelDistance = distanceTraveled;
+        }
+    }
+
+    private void CheckForStopCondition()
+    {
+        if (rb.linearVelocity.magnitude < minSpeedThreshold)
+        {
+            stopTimer += Time.fixedDeltaTime;
+            if (stopTimer >= stopDelay && !isStopped)
+            {
+                isStopped = true;
+                SceneManager.LoadScene("GameOverScene");
+            }
+        }
+        else
+        {
+            stopTimer = 0f;
         }
     }
 
