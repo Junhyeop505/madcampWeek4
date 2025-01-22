@@ -29,6 +29,9 @@ public class Aerodynamics : MonoBehaviour
 
     private float startXPosition;
 
+    private int remainingBoosts = 2;
+    public float boostForce = 10f;
+
     private void Start()
     {
         if (rb == null)
@@ -54,6 +57,45 @@ public class Aerodynamics : MonoBehaviour
         HandleSlingshotInput();
         AdjustPlaneTilt();
         AlignPlaneWithVelocity();
+        HandleBoostInput();
+        //if (released)
+        //{
+        //    ControlPlaneWithMouse();
+        //}
+    }
+
+    private void HandleBoostInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && remainingBoosts > 0)
+        {
+            ApplyBoost();
+            remainingBoosts--;
+        }
+    }
+
+    private void ApplyBoost()
+    {
+        Vector3 boostDirection = transform.forward;
+        rb.AddForce(boostDirection.normalized*boostForce,ForceMode.Impulse);
+    }
+
+    private void ControlPlaneWithMouse()
+    {
+        Vector3 mousePosition=Input.mousePosition;
+        float screenCenterX = Screen.width / 2;
+        float screenCenterY=Screen.height / 2;
+
+        float xOffset=(mousePosition.x-screenCenterX)/screenCenterX;
+        float yOffset=(mousePosition.y-screenCenterY)/screenCenterY;
+
+        float rotationSpeed = 5f;
+        float maxTiltAngle = 45f;
+
+        float targetYaw=Mathf.Clamp(xOffset*maxTiltAngle,-maxTiltAngle,maxTiltAngle);
+        float targetPitch = Mathf.Clamp(-yOffset * maxTiltAngle, -maxTiltAngle, maxTiltAngle);
+
+        Quaternion targetRotation=Quaternion.Euler(targetPitch,targetYaw,0);
+        transform.rotation=Quaternion.Slerp(transform.rotation,targetRotation,Time.deltaTime);
     }
 
     bool IsPointerOverUI()
