@@ -7,11 +7,15 @@ public class FloatingMotion : MonoBehaviour
     public float amplitude = 0.5f; // 움직이는 거리
 
     private Vector3 startPosition;
+    private Vector3 originalScale; // 원래 크기 저장
+
 
     void Start()
     {
         // 오브젝트의 시작 위치 저장
         startPosition = transform.position;
+        originalScale = transform.localScale;
+
     }
 
     void Update()
@@ -23,7 +27,13 @@ public class FloatingMotion : MonoBehaviour
 
     void OnMouseDown()
     {
-        // StartCloud가 클릭되었을 때 LobyScene으로 전환
+        transform.localScale = originalScale * 0.9f;
+        Invoke("LoadTutorialScene", 0.1f);
+
+    }
+
+    void LoadTutorialScene()
+    {
         SceneManager.LoadScene("LobyScene");
     }
 }

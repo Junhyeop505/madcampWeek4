@@ -609,6 +609,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 54718b0dd2b67487189e6aaaa60a04ed, type: 3}
   - {fileID: 21300000, guid: 31caa6b6fb7cc43948b6ae3816572262, type: 3}
   - {fileID: 21300000, guid: 878922c447e5941798c1e9fa95a1bd61, type: 3}
+  - {fileID: 21300000, guid: 180d387b3894c4dd0a9800a7e9f4b03c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
