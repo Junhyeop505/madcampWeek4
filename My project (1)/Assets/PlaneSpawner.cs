@@ -78,7 +78,7 @@ using UnityEngine;
 
 public class PlaneSpawner : MonoBehaviour
 {
-    public Vector3 spawnPosition = new Vector3(27, 10, -40);
+    public Vector3 spawnPosition = new Vector3(3, 70, -50);
     public Quaternion spawnRotation = Quaternion.identity;
 
     void Start()
@@ -94,6 +94,11 @@ public class PlaneSpawner : MonoBehaviour
         if (selectedPlanePrefab != null)
         {
             GameObject spawnedPlane = Instantiate(selectedPlanePrefab, spawnPosition, spawnRotation);
+            CameraFollow cameraFollow=Camera.main.GetComponent<CameraFollow>();
+            if (cameraFollow != null)
+            {
+                cameraFollow.target = spawnedPlane.transform;
+            }
             Debug.Log("Spawned plane: " + spawnedPlane.name);
         }
         else

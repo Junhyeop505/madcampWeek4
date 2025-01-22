@@ -9,7 +9,7 @@ public class Aerodynamics : MonoBehaviour
     public float wingArea = 0.2f; // Approximate wing area
     public float airDensity = 1.225f; // kg/m^3 at sea level
 
-    public float maxPullForce = 15f; // Maximum force applied during slingshot
+    public float maxPullForce = 30f; // Maximum force applied during slingshot
     public float maxPullDistance = 10f; // Maximum pull distance
 
     private bool isPulling = false;
