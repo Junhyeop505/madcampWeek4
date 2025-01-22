@@ -6,7 +6,7 @@ public class ShootingNeob : MonoBehaviour
     public Transform launchPoint;   // 발사 위치 (Inspector에서 연결)
     public float launchForce = 20f; // 초기 발사 속도
     public float upwardForce = 20f; // 위로 향하는 추가 힘
-    public float fireRate = 2f;     // 발사 주기 (초 단위)
+    public float fireRate = 1f;     // 발사 주기 (초 단위)
 
     void Start()
     {
