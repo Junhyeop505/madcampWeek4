@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class Aerodynamics : MonoBehaviour
 {
     public Rigidbody rb;
-    public float liftCoefficient = 0.7f; // Adjust for realism
+    public float liftCoefficient = 0.3f; // Adjust for realism
     public float dragCoefficient = 0.1f; // Adjust for realism
     public float wingArea = 0.2f; // Approximate wing area
     public float airDensity = 1.225f; // kg/m^3 at sea level
@@ -27,7 +27,10 @@ public class Aerodynamics : MonoBehaviour
     public float stopDelay = 5f;
     private bool isStopped = false;
 
-    private float startXPosition;
+    private float startZPosition;
+
+    private int remainingBoosts = 2;
+    public float boostForce = 10f;
 
     private void Start()
     {
@@ -39,7 +42,7 @@ public class Aerodynamics : MonoBehaviour
         rb.centerOfMass = new Vector3(0, -0.05f, 0);
         rb.isKinematic = true; // Start stationary
         originalPosition = transform.position;
-        startXPosition = transform.position.x;
+        startZPosition = transform.position.z;
     }
 
     private void Update()
@@ -54,6 +57,45 @@ public class Aerodynamics : MonoBehaviour
         HandleSlingshotInput();
         AdjustPlaneTilt();
         AlignPlaneWithVelocity();
+        HandleBoostInput();
+        //if (released)
+        //{
+        //    ControlPlaneWithMouse();
+        //}
+    }
+
+    private void HandleBoostInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && remainingBoosts > 0)
+        {
+            ApplyBoost();
+            remainingBoosts--;
+        }
+    }
+
+    private void ApplyBoost()
+    {
+        Vector3 boostDirection = transform.forward;
+        rb.AddForce(boostDirection.normalized*boostForce,ForceMode.Impulse);
+    }
+
+    private void ControlPlaneWithMouse()
+    {
+        Vector3 mousePosition=Input.mousePosition;
+        float screenCenterX = Screen.width / 2;
+        float screenCenterY=Screen.height / 2;
+
+        float xOffset=(mousePosition.x-screenCenterX)/screenCenterX;
+        float yOffset=(mousePosition.y-screenCenterY)/screenCenterY;
+
+        float rotationSpeed = 5f;
+        float maxTiltAngle = 45f;
+
+        float targetYaw=Mathf.Clamp(xOffset*maxTiltAngle,-maxTiltAngle,maxTiltAngle);
+        float targetPitch = Mathf.Clamp(-yOffset * maxTiltAngle, -maxTiltAngle, maxTiltAngle);
+
+        Quaternion targetRotation=Quaternion.Euler(targetPitch,targetYaw,0);
+        transform.rotation=Quaternion.Slerp(transform.rotation,targetRotation,Time.deltaTime);
     }
 
     bool IsPointerOverUI()
@@ -79,7 +121,7 @@ public class Aerodynamics : MonoBehaviour
 
     private void TrackDistance()
     {
-        float distanceTraveled=transform.position.x-startXPosition;
+        float distanceTraveled=transform.position.z-startZPosition;
         if (distanceTraveled > PlaneData.Instance.planeTravelDistance)
         {
             PlaneData.Instance.planeTravelDistance = distanceTraveled;
