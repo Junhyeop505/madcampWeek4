@@ -8,7 +8,7 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 0.2f; // Smoothness factor for camera movement
     public Vector3 fixedRotation = new Vector3(10, 0, 0);
     public bool dynamicOffset = true;
-    public Vector3 fixedPosition = new Vector3(6, 12, -50);
+    public Vector3 fixedPosition = new Vector3(6, 12, -60);
     private bool isFollowing = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //void Start()

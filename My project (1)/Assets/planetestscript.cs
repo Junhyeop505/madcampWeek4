@@ -43,6 +43,7 @@ public class Aerodynamics : MonoBehaviour
         rb.isKinematic = true; // Start stationary
         originalPosition = transform.position;
         startZPosition = transform.position.z;
+        PlaneData.Instance.planeTravelDistance=0f;
     }
 
     private void Update()
@@ -113,7 +114,7 @@ public class Aerodynamics : MonoBehaviour
         if ((!isPulling) && released) // Only apply aerodynamics when not pulling
         {
             ApplyAerodynamics();
-            //AdjustPlaneTilt();
+            AdjustPlaneTilt();
             CheckForStopCondition();
             TrackDistance();
         }
