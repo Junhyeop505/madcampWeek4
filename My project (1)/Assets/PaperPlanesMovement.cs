@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PaperPlanesMovement : MonoBehaviour
 {
-    public float speed = 8.0f; // 비행기 이동 속도
-    public float yRange = 5.0f; // Y축 포물선 높이
+    public float speed = 13.0f; // 비행기 이동 속도
+    public float yRange = 2.0f; // Y축 포물선 높이
     public float startOffset = 15.0f; // 시작 위치를 화면 왼쪽에서 얼마나 오른쪽으로 이동할지
     public float zOffset = 10.0f; // Z축 오프셋(뒤쪽 위치)
     public float rotationSpeed = 0f; // 비행기 회전 속도(각도/초)
-    public float repeatInterval = 5.0f; // 반복 간격(초)
+    public float repeatInterval = 2.0f; // 반복 간격(초)
     public float extraRightDistance = 15.0f; // 화면 오른쪽 경계를 넘어가는 추가 이동 거리
 
     private Vector3 startPosition;
