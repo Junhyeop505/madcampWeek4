@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class PaperPlanesMovement3 : MonoBehaviour
+public class PaperPlanesMovement4 : MonoBehaviour
 {
-    public float speed = 17.0f; // 비행기 이동 속도
-    public float yRange = 4.0f; // Y축 포물선 높이
-    public float startOffset = 15.0f; // 시작 위치를 화면 왼쪽에서 얼마나 오른쪽으로 이동할지
+    public float speed = 25.0f; // 비행기 이동 속도
+    public float yRange = 2.0f; // Y축 포물선 높이
+    public float startOffset = 15.0f; // 시작 위치를 화면 오른쪽에서 얼마나 왼쪽으로 이동할지
     public float zOffset = 10.0f; // Z축 오프셋(뒤쪽 위치)
     public float rotationSpeed = 0f; // 비행기 회전 속도(각도/초)
-    public float repeatInterval = 2.0f; // 반복 간격(초)
-    public float extraRightDistance = 15.0f; // 화면 오른쪽 경계를 넘어가는 추가 이동 거리
+    public float repeatInterval = 4.0f; // 반복 간격(초)
+    public float extraLeftDistance = 15.0f; // 화면 왼쪽 경계를 넘어가는 추가 이동 거리
 
     private Vector3 startPosition;
     private float screenLeftEdge;
@@ -28,8 +28,8 @@ public class PaperPlanesMovement3 : MonoBehaviour
         screenLeftEdge = mainCamera.ViewportToWorldPoint(new Vector3(0, 0.5f, Mathf.Abs(mainCamera.transform.position.z))).x;
         screenRightEdge = mainCamera.ViewportToWorldPoint(new Vector3(1, 0.5f, Mathf.Abs(mainCamera.transform.position.z))).x;
 
-        // 시작 위치를 화면 왼쪽 경계에서 더 왼쪽으로 이동하고 뒤쪽으로 설정
-        startPosition = new Vector3(screenLeftEdge - startOffset, transform.position.y, zOffset);
+        // 시작 위치를 화면 오른쪽 경계에서 더 오른쪽으로 이동하고 뒤쪽으로 설정
+        startPosition = new Vector3(screenRightEdge + startOffset, transform.position.y, zOffset);
         transform.position = startPosition;
 
         // 이동 시작
@@ -45,10 +45,10 @@ public class PaperPlanesMovement3 : MonoBehaviour
             elapsedTime = 0.0f;
 
             // 비행기가 포물선을 그리며 이동
-            while (transform.position.x < screenRightEdge + extraRightDistance)
+            while (transform.position.x > screenLeftEdge - extraLeftDistance)
             {
-                // X축 이동
-                float newX = transform.position.x + (speed * Time.deltaTime);
+                // X축 이동 (오른쪽에서 왼쪽으로)
+                float newX = transform.position.x - (speed * Time.deltaTime);
                 // Y축 이동 (포물선)
                 float newY = startPosition.y + Mathf.Sin((newX - screenLeftEdge) / (screenRightEdge - screenLeftEdge) * Mathf.PI) * yRange;
 
