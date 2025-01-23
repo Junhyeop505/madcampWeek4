@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class Aerodynamics : MonoBehaviour
 {
     public Rigidbody rb;
-    public float liftCoefficient = 0.7f; // Adjust for realism
+    public float liftCoefficient = 0.3f; // Adjust for realism
     public float dragCoefficient = 0.1f; // Adjust for realism
     public float wingArea = 0.2f; // Approximate wing area
     public float airDensity = 1.225f; // kg/m^3 at sea level
@@ -27,7 +27,7 @@ public class Aerodynamics : MonoBehaviour
     public float stopDelay = 5f;
     private bool isStopped = false;
 
-    private float startXPosition;
+    private float startZPosition;
 
     private int remainingBoosts = 2;
     public float boostForce = 10f;
@@ -42,7 +42,7 @@ public class Aerodynamics : MonoBehaviour
         rb.centerOfMass = new Vector3(0, -0.05f, 0);
         rb.isKinematic = true; // Start stationary
         originalPosition = transform.position;
-        startXPosition = transform.position.x;
+        startZPosition = transform.position.z;
     }
 
     private void Update()
@@ -121,7 +121,7 @@ public class Aerodynamics : MonoBehaviour
 
     private void TrackDistance()
     {
-        float distanceTraveled=transform.position.x-startXPosition;
+        float distanceTraveled=transform.position.z-startZPosition;
         if (distanceTraveled > PlaneData.Instance.planeTravelDistance)
         {
             PlaneData.Instance.planeTravelDistance = distanceTraveled;

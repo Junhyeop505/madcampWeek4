@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlaneSpawner : MonoBehaviour
 {
-    public Vector3 spawnPosition = new Vector3(3, 70, -50);
+    public Vector3 spawnPosition = new Vector3(3, 20, -50);
     public Quaternion spawnRotation = Quaternion.identity;
 
     void Start()

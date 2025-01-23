@@ -7,20 +7,21 @@ public class GameOverManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        float distance=PlaneData.Instance.planeTravelDistance;
-        string grade=GetGrade(distance);
+        float distance = PlaneData.Instance.planeTravelDistance;
+        string grade = GetGrade(distance);
+        string colorGrade = (grade == "A") ? $"<color=yellow>{grade}</color>" : grade;
         gradeText.text = $"Distance: {distance:F2} meters\nGrade: {grade}";
     }
 
-     private string GetGrade(float distance)
+    private string GetGrade(float distance)
     {
         if (distance > 40)
-            return "A";
+            return $"<color=yellow>A</color>";
         else if (distance > 30)
             return "B";
-        else if(distance>20)
+        else if (distance > 20)
             return "C";
-        else if(distance>10)
+        else if (distance > 10)
             return "D";
         else return "F";
     }

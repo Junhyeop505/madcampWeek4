@@ -175,13 +175,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6edfb57ee35e58e45ba7b0bb8a9c5749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  liftCoefficient: 0.7
+  rb: {fileID: 5955837172898003574}
+  liftCoefficient: 0.3
   dragCoefficient: 0.1
   wingArea: 0.2
   airDensity: 1.225
   maxPullForce: 30
   maxPullDistance: 10
+  minSpeedThreshold: 0.05
+  stopTimer: 0
+  stopDelay: 5
+  boostForce: 10
 --- !u!1 &4233024306599599507
 GameObject:
   m_ObjectHideFlags: 0
