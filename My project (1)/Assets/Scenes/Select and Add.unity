@@ -2881,12 +2881,6 @@ MonoBehaviour:
   planeContainer: {fileID: 831565666}
   addPlaneButton: {fileID: 496730268}
   loadGameSceneButton: {fileID: 850149883}
-  addPlanePanel: {fileID: 980372660}
-  inputWingArea: {fileID: 1873390702}
-  inputLiftCoefficient: {fileID: 826097988}
-  inputDragCoefficient: {fileID: 1974505418}
-  createPlaneButton: {fileID: 269170366}
-  closePanelButton: {fileID: 1210094565}
 --- !u!4 &1734658251
 Transform:
   m_ObjectHideFlags: 0

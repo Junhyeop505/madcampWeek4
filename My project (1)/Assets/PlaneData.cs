@@ -2,19 +2,19 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlaneData:MonoBehaviour
+public class PlaneData : MonoBehaviour
 {
     public static PlaneData Instance;
     public List<GameObject> planeModels = new List<GameObject>();
-    public List<PlaneAttributes> planeAttributes = new List<PlaneAttributes>();
     public int selectedPlaneIndex = -1;
-    public float planeTravelDistance = 0f;
+     public float planeTravelDistance = 0f;
+
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // Keep this object between scenes
         }
         else
         {

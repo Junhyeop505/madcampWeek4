@@ -2,72 +2,94 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEditor.Rendering;
+using UnityEngine.Networking;
+using System.Collections;
 
 public class PlaneManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public GameObject planePrefab;
-    public Transform planeContainer;
+    public GameObject planePrefab; // Assign PaperAirPlane prefab in Inspector
+    public Transform planeContainer; // Assign a UI container for plane selection buttons
     public Button addPlaneButton;
     public Button loadGameSceneButton;
-    public GameObject addPlanePanel;
 
-    public TMP_InputField inputWingArea;
-    public TMP_InputField inputLiftCoefficient;
-    public TMP_InputField inputDragCoefficient;
-    public Button createPlaneButton;
-    public Button closePanelButton;
+    private string apiUrl = "https://fastapi-app-313452959284.us-central1.run.app/results/";
+
     void Start()
     {
-        addPlanePanel.SetActive(false);
-        addPlaneButton.onClick.AddListener(OpenAddPlanePanel);
-        createPlaneButton.onClick.AddListener(CreateNewPlane);
-        closePanelButton.onClick.AddListener(CloseAddPlanePanel);
+        addPlaneButton.onClick.AddListener(FetchAndCreatePlane);
         loadGameSceneButton.onClick.AddListener(LoadGameScene);
-    }
 
-    public void OpenAddPlanePanel()
-    {
-        addPlanePanel.SetActive(true);
-        planeContainer.gameObject.SetActive(false);
-
-    }
-
-    public void CloseAddPlanePanel()
-    {
-        addPlanePanel.SetActive(false);
-        planeContainer.gameObject.SetActive(true);
-    }
-
-    private void CreateNewPlane()
-    {
-        float wingArea, liftCoefficient, dragCoefficient;
-        if(float.TryParse(inputWingArea.text, out wingArea) && 
-           float.TryParse(inputLiftCoefficient.text, out liftCoefficient) &&
-            float.TryParse(inputDragCoefficient.text, out dragCoefficient))
+        if (planePrefab == null)
         {
-            GameObject newPlane=Instantiate(planePrefab, Vector3.zero, Quaternion.identity);
-            Aerodynamics planeScript= newPlane.GetComponent<Aerodynamics>();
-            if (planeScript != null)
-            {
-                planeScript.wingArea = wingArea;
-                planeScript.liftCoefficient = liftCoefficient;
-                planeScript.dragCoefficient = dragCoefficient;
-            }
-            PlaneData.Instance.planeModels.Add(planePrefab);
-            PlaneData.Instance.planeAttributes.Add(new PlaneAttributes{
-                WingArea = wingArea,
-                LiftCoefficient = liftCoefficient,
-                DragCoefficient= dragCoefficient,
-            });
-            int newIndex = PlaneData.Instance.planeModels.Count - 1;
-            CreatePlaneSelectionButton("Plane" + newIndex, newIndex);
-            addPlanePanel.SetActive(false);
-            planeContainer.gameObject.SetActive(true);
-
+            Debug.LogError("Plane prefab is not assigned in PlaneManager!");
         }
     }
+
+    private void FetchAndCreatePlane()
+    {
+        StartCoroutine(FetchPlaneData());
+    }
+
+    private IEnumerator FetchPlaneData()
+    {
+        UnityWebRequest request = UnityWebRequest.Get(apiUrl);
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string jsonResponse = request.downloadHandler.text;
+            Debug.Log("API Response: " + jsonResponse);
+
+            PlaneInfo[] planeDataArray = JsonHelper.FromJson<PlaneInfo>(jsonResponse);
+            if (planeDataArray != null && planeDataArray.Length > 0)
+            {
+                CreatePlaneFromData(planeDataArray[0]); // Use the first entry in the response
+            }
+            else
+            {
+                Debug.LogError("No data returned from the API.");
+            }
+        }
+        else
+        {
+            Debug.LogError($"Error fetching data: {request.error}");
+        }
+    }
+
+    private void CreatePlaneFromData(PlaneInfo data)
+{
+    if (data == null)
+    {
+        Debug.LogError("Received null data in CreatePlaneFromData!");
+        return;
+    }
+
+    GameObject newPlane = Instantiate(planePrefab, Vector3.zero, Quaternion.identity);
+    newPlane.name = data.filename;
+
+    Aerodynamics planeScript = newPlane.GetComponent<Aerodynamics>();
+    if (planeScript != null)
+    {
+        planeScript.wingArea = data.wing_area;
+        planeScript.liftCoefficient = data.lift_coefficient;
+        planeScript.dragCoefficient = data.drag_coefficient;
+    }
+
+    if (PlaneData.Instance != null)
+    {
+        PlaneData.Instance.planeModels.Add(newPlane);
+        DontDestroyOnLoad(newPlane);
+
+        Debug.Log($"Plane added: {newPlane.name}. Total planes: {PlaneData.Instance.planeModels.Count}");
+
+        PlaneData.Instance.selectedPlaneIndex = PlaneData.Instance.planeModels.Count - 1; // Automatically select
+        Debug.Log($"Plane added and selected: {newPlane.name}");
+    }
+    else
+    {
+        Debug.LogError("PlaneData.Instance is null! Plane cannot be stored.");
+    }
+}
 
     private void CreatePlaneSelectionButton(string planeName, int index)
     {
@@ -86,14 +108,44 @@ public class PlaneManager : MonoBehaviour
 
     private void SelectPlane(int index)
     {
-        PlaneData.Instance.selectedPlaneIndex = index;
-        Debug.Log("Plane selected: " + index);
+        if (PlaneData.Instance != null && index >= 0 && index < PlaneData.Instance.planeModels.Count)
+        {
+            PlaneData.Instance.selectedPlaneIndex = index;
+            Debug.Log($"Plane selected: {PlaneData.Instance.planeModels[index].name}");
+        }
+        else
+        {
+            Debug.LogError($"Invalid plane index: {index}. Cannot select plane.");
+        }
     }
 
     private void LoadGameScene()
+{
+    if (PlaneData.Instance == null || PlaneData.Instance.planeModels.Count == 0)
     {
-        SceneManager.LoadScene("PlaymapScene");
+        Debug.LogError("No planes available to load the game scene!");
+        return;
     }
+
+    if (PlaneData.Instance.selectedPlaneIndex < 0 || PlaneData.Instance.selectedPlaneIndex >= PlaneData.Instance.planeModels.Count)
+    {
+        Debug.LogError($"Invalid selectedPlaneIndex: {PlaneData.Instance.selectedPlaneIndex}. Cannot load game.");
+        return;
+    }
+
+    Debug.Log("Start button clicked. Loading PlaymapScene...");
+    SceneManager.LoadScene("PlaymapScene");
+}
+
+    [System.Serializable]
+    public class PlaneInfo
+    {
+        public string filename;
+        public float wing_area;
+        public float lift_coefficient;
+        public float drag_coefficient;
+    }
+}
 
    
 
@@ -124,4 +176,4 @@ public class PlaneManager : MonoBehaviour
     //{
     //    PlaneData.Instance.selectedPlaneIndex = index;
     //}
-}
+
