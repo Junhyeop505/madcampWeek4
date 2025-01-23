@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 public class Aerodynamics : MonoBehaviour
 {
     public Rigidbody rb;
-    public float liftCoefficient = 0.3f; // Adjust for realism
-    public float dragCoefficient = 0.1f; // Adjust for realism
+    public float liftCoefficient = 0.07f; // Adjust for realism
+    public float dragCoefficient = 0.02f; // Adjust for realism
     public float wingArea = 0.2f; // Approximate wing area
     public float airDensity = 1.225f; // kg/m^3 at sea level
 
-    public float maxPullForce = 30f; // Maximum force applied during slingshot
-    public float maxPullDistance = 10f; // Maximum pull distance
+    public float maxPullForce = 4f; // Maximum force applied during slingshot
+    public float maxPullDistance = 5f; // Maximum pull distance
 
 
     private bool isPulling = false;
@@ -29,8 +29,8 @@ public class Aerodynamics : MonoBehaviour
 
     private float startZPosition;
 
-    private int remainingBoosts = 2;
-    public float boostForce = 10f;
+    private int remainingBoosts = 1;
+    public float boostForce = 2f;
 
     private void Start()
     {

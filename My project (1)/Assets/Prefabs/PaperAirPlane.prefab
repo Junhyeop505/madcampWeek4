@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3721010127516832192}
@@ -45,7 +45,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3888496431440056271}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -176,16 +176,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5955837172898003574}
-  liftCoefficient: 0.3
-  dragCoefficient: 0.1
+  liftCoefficient: 0.07
+  dragCoefficient: 0.02
   wingArea: 0.2
   airDensity: 1.225
-  maxPullForce: 30
-  maxPullDistance: 10
+  maxPullForce: 4
+  maxPullDistance: 5
   minSpeedThreshold: 0.05
   stopTimer: 0
   stopDelay: 5
-  boostForce: 10
+  boostForce: 2
 --- !u!1 &4233024306599599507
 GameObject:
   m_ObjectHideFlags: 0

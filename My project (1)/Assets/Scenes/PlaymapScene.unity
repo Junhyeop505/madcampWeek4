@@ -690,12 +690,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c02eabc3dc66eea4fb88444ebd81be1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1772963214}
   Offset: {x: 0, y: 2, z: -2}
   smoothSpeed: 0.2
   fixedRotation: {x: 10, y: 0, z: 0}
   dynamicOffset: 1
-  fixedPosition: {x: 0, y: 10, z: -70}
+  fixedPosition: {x: 6, y: 12, z: -50}
 --- !u!1 &181689727
 GameObject:
   m_ObjectHideFlags: 0
@@ -18041,7 +18041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feb6dbd089f519449b9391a48007cbe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPosition: {x: 3, y: 20, z: -50}
+  spawnPosition: {x: 6, y: 11, z: -42}
   spawnRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!4 &1772963214
 Transform:

@@ -50,10 +50,17 @@ public class Gameovercloud : MonoBehaviour
             var main=cloudParticles.main;
             var shape=cloudParticles.shape;
 
-            main.startSize = new ParticleSystem.MinMaxCurve(0.5f, 1.0f);
+            // main.startSize = new ParticleSystem.MinMaxCurve(0.5f, 1.0f);
+            main.startSize3D=true;
+            main.startSizeX=new ParticleSystem.MinMaxCurve(0.5f,0.8f);
+            main.startSizeY=new ParticleSystem.MinMaxCurve(0.3f,0.5f);
+            main.startSizeZ=new ParticleSystem.MinMaxCurve(0.5f,0.8f);
+            shape.shapeType=ParticleSystemShapeType.Sphere;
+            shape.radius=5.0f;
+            shape.scale=new Vector3(2.0f,2.0f,2.0f);
 
-            shape.radius = 5.0f;
-            shape.angle = 45.0f;
+            // shape.radius = 5.0f;
+            // shape.angle = 45.0f;
         }
     }
 }

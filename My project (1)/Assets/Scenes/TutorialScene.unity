@@ -603,12 +603,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialImage: {fileID: 1787746278}
   tutorialSprites:
-  - {fileID: 21300000, guid: 43eff9c943efc49d783ceba597f50d59, type: 3}
-  - {fileID: 21300000, guid: b8d75993e92514bb393fe271597c1900, type: 3}
-  - {fileID: 21300000, guid: 0c994095ef8b142bfa637ca3300d31c4, type: 3}
-  - {fileID: 21300000, guid: 54718b0dd2b67487189e6aaaa60a04ed, type: 3}
-  - {fileID: 21300000, guid: 31caa6b6fb7cc43948b6ae3816572262, type: 3}
-  - {fileID: 21300000, guid: 878922c447e5941798c1e9fa95a1bd61, type: 3}
+  - {fileID: 21300000, guid: dadc04d72bac75a47addad94384f155c, type: 3}
+  - {fileID: 21300000, guid: 6503d2619b6e89143ae3dbe5043e16ab, type: 3}
+  - {fileID: 21300000, guid: e98badf511f43bb4d948e1d4ad48247e, type: 3}
+  - {fileID: 21300000, guid: 8995402bb79af914eb02e857869fd87e, type: 3}
+  - {fileID: 21300000, guid: 474cc4c62f57f2a44a1f773d53f8dd6e, type: 3}
+  - {fileID: 21300000, guid: c8d99e7f55f3936419de7ef76c764ff2, type: 3}
   - {fileID: 21300000, guid: 180d387b3894c4dd0a9800a7e9f4b03c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

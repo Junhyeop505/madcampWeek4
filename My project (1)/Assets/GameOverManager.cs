@@ -14,14 +14,30 @@ public class GameOverManager : MonoBehaviour
 
      private string GetGrade(float distance)
     {
-        if (distance > 40)
+        if (distance > 97)
+            return "A+";
+        else if(distance>94)
             return "A";
-        else if (distance > 30)
+        else if(distance>90)
+            return "A-";
+        else if(distance>85)
+            return "B+";
+        else if (distance > 80)
             return "B";
-        else if(distance>20)
+        else if(distance>75)
+            return "B-";
+        else if(distance>70)
+            return "C+";
+        else if(distance>63)
             return "C";
-        else if(distance>10)
+        else if(distance>55)
+            return "C-";
+        else if(distance>50)
+            return "D+";
+        else if(distance>43)
             return "D";
+        else if(distance>37)
+            return "D-";
         else return "F";
     }
 }
